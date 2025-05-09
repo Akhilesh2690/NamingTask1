@@ -4,6 +4,6 @@ namespace Naming.Task1
 {
     public interface IOrderService
     {
-        void SubmitOrder(IOrder pOrder);
+        void SubmitOrder(IOrder order);
     }
 }

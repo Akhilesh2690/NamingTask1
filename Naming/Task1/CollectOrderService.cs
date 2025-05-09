@@ -4,24 +4,24 @@ namespace Naming.Task1
 {
     public class CollectOrderService : IOrderService
     {
-        private readonly ICollectionService Ser1;
-        private readonly INotificationManager Ser2;
+        private readonly ICollectionService _collectionService;
+        private readonly INotificationManager _notificationManager;
 
-        public CollectOrderService(ICollectionService pCollectionService, INotificationManager pNotificationManager)
+        public CollectOrderService(ICollectionService collectionService, INotificationManager notificationManager)
         {
-            Ser1 = pCollectionService;
-            Ser2 = pNotificationManager;
+            _collectionService = collectionService;
+            _notificationManager = notificationManager;
         }
 
-        public void SubmitOrder(IOrder pOrder)
+        public void SubmitOrder(IOrder order)
         {
-            if (Ser1.IsEligibleForCollect(pOrder))
+            if (_collectionService.IsEligibleForCollect(order))
             {
-                Ser2.NotifyCustomer(Message.ReadyForCollect, 4); // 4 - info notification level
+                _notificationManager.NotifyCustomer(Message.ReadyForCollect, NotificationLevel.Info); // 4 - info notification level
             }
             else
             {
-                Ser2.NotifyCustomer(Message.ImpossibleToCollect, 1); // 1 - critical notification level
+                _notificationManager.NotifyCustomer(Message.ImpossibleToCollect, NotificationLevel.Critical); // 1 - critical notification level
             }
         }
     }

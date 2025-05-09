@@ -5,21 +5,21 @@ namespace Naming.Task1
 {
     public class DeliveryOrderService : IOrderService
     {
-        private readonly IDeliveryService mDeliveryService;
-        private readonly IOrderFulfilmentService mOrderFulfilmentService;
+        private readonly IDeliveryService _deliveryService;
+        private readonly IOrderFulfilmentService _orderFulfilmentService;
 
-        public DeliveryOrderService(IDeliveryService pDeliveryService, IOrderFulfilmentService pOrderFulfilmentService)
+        public DeliveryOrderService(IDeliveryService deliveryService, IOrderFulfilmentService orderFulfilmentService)
         {
-            mDeliveryService = pDeliveryService;
-            mOrderFulfilmentService = pOrderFulfilmentService;
+            _deliveryService = deliveryService;
+            _orderFulfilmentService = orderFulfilmentService;
         }
 
-        public void SubmitOrder(IOrder pOrder)
+        public void SubmitOrder(IOrder order)
         {
-            if (mDeliveryService.IsDeliverable())
+            if (_deliveryService.IsDeliverable())
             {
-                IList<IProduct> products = pOrder.GetProducts();
-                mOrderFulfilmentService.FulfilProducts(products);
+                IList<IProduct> products = order.GetProducts();
+                _orderFulfilmentService.FulfilProducts(products);
             }
             else
             {
